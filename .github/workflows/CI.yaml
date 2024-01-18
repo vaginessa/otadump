@@ -1,16 +1,18 @@
-name: release
+name: CI
+
 on:
-  push:
-    branches: [mainline]
-  pull_request:
   workflow_dispatch:
-env:
-  CARGO_INCREMENTAL: 0
-permissions:
-  contents: write
+  pull_request:
+    branches: [ "mainline" ]
+    paths-ignore:
+      - "README.md"
+  push:
+    branches: [ "mainline" ]
+    paths-ignore:
+      - "README.md"
 
 jobs:
-  release:
+  ci:
     name: ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -29,11 +31,10 @@ jobs:
             target: aarch64-unknown-linux-musl
           
           # Darwin targets
-          - os: macos-11
-            target:
-              x86_64-apple-darwin
-              # - os: macos-11
-              #   target: aarch64-apple-darwin
+          - os: macos-latest
+            target: x86_64-apple-darwin
+        # - os: macos-latest
+        #   target: aarch64-apple-darwin
 
           # Windows targets
           - os: windows-latest
@@ -44,18 +45,9 @@ jobs:
             triplet: arm64-windows-static-md
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@dc323e67f16fb5f7663d20ff7941f27f5809e9b6 # v2.6.0
-        with:
-          fetch-depth: 0
-
-      - name: Get version
-        id: get_version
-        uses: SebRollen/toml-action@2bd04b06a3ebc3e6a3eb6060de115710cad16cd6 # v1.0.2
-        with:
-          file: Cargo.toml
-          field: package.version
-
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Install Rust
         uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1.0.7
         with:
@@ -63,6 +55,12 @@ jobs:
           profile: minimal
           override: true
           target: ${{ matrix.target }}
+          
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          targets: ${{ matrix.target }}
 
       - name: Setup cache
         uses: Swatinem/rust-cache@81d053bdb0871dcd3f10763c8cc60d0adc41762b # v1
