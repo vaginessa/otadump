@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 env:
-  VCPKG_COMMIT_ID: "53bef8994c541b6561884a8395ea35715ece75db"
+  VCPKG_COMMIT_ID: "8eb57355a4ffb410a2e94c07b4dca2dffbee8e50"
 
 jobs:
   ci:
