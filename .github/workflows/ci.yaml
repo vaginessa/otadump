@@ -77,9 +77,6 @@ jobs:
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
-        with:
-          vcpkgDirectory: C:/vcpkg
-          doNotUpdateVcpkg: true
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
