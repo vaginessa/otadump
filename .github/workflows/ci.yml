@@ -19,7 +19,6 @@ jobs:
     name: ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
         include:
 
@@ -62,7 +61,7 @@ jobs:
         with:
           key: ${{ matrix.target }}
 
-      - name: Install xz, protobuf for MacOS
+      - name: Install xz, protobuf on MacOS
         if: runner.os == 'macOS'
         run: brew install xz protobuf
 
@@ -77,11 +76,14 @@ jobs:
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: C:/vcpkg
+          doNotUpdateVcpkg: true
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
         run: |
-          ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
+          ./vcpkg/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
 
       - name: Build binary
         uses: actions-rs/cargo@v1
