@@ -76,7 +76,7 @@ jobs:
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
-        uses: lukka/get-cmake@latest
+        uses: lukka/run-vcpkg@v11
         with:
           vcpkgDirectory: C:/vcpkg
           doNotUpdateVcpkg: true
@@ -93,7 +93,7 @@ jobs:
           args: --release --locked --target=${{ matrix.target }} --color=always --verbose
           use-cross: ${{ runner.os == 'Linux' }}
 
-      - name: Package for (*nix)
+      - name: Package for *nix
         if: runner.os != 'Windows'
         run: >
           tar -cv
@@ -102,7 +102,7 @@ jobs:
           | gzip --best
           > 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.tar.gz'
           
-      - name: Package for (Windows)
+      - name: Package for Windows
         if: runner.os == 'Windows'
         run: >
           7z a 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip'
