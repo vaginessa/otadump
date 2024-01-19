@@ -73,7 +73,7 @@ jobs:
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
-      - uses: lukka/get-cmake@latest
+        uses: lukka/get-cmake@latest
         with:
           vcpkgDirectory: C:/vcpkg
           doNotUpdateVcpkg: true
