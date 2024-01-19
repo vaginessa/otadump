@@ -1,13 +1,5 @@
-<!-- markdownlint-configure-file {
-  "MD033": false,
-  "MD041": false
-} -->
-
-<div align="center">
 
 # otadump
-
-[![crates.io][crates.io-badge]][crates.io]
 
 **`otadump` helps you extract partitions from Android OTA files.** <br />
 Partitions can be individually flashed to your device using `fastboot`.
@@ -74,7 +66,7 @@ Download the pre-built binary from the [Releases] page. Extract it and run the
 
 Run the following command in your terminal:
 
-```sh
+```
 # Run directly on .zip file.
 otadump ota.zip
 
