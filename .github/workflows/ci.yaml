@@ -84,7 +84,7 @@ jobs:
           ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
 
       - name: Build binary
-        uses: actions-rs/cargo@844f36862e911db73fe0815f00a4a2602c279505 # v1.0.3
+        uses: actions-rs/cargo@v1
         with:
           command: build
           args: --release --locked --target=${{ matrix.target }} --color=always --verbose
@@ -107,7 +107,7 @@ jobs:
           ./target/${{ matrix.target }}/release/otadump.exe
           
       - name: Upload artifact
-        uses: actions/upload-artifact@694cdabd8bdb0f10b2cea11669e1bf5453eed0a6 # v4.2.0
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.target }}
           path: |
