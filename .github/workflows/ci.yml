@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 env:
-  VCPKG_COMMIT_ID: "8eb57355a4ffb410a2e94c07b4dca2dffbee8e50"
+  VCPKG_COMMIT_ID: "53bef8994c541b6561884a8395ea35715ece75db"
 
 jobs:
   ci:
@@ -82,13 +82,12 @@ jobs:
         uses: lukka/run-vcpkg@v11
         id: runvcpkg
         with:
-          vcpkgDirectory: C:/vcpkg
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT_ID }}'
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
         run: |
-          ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }} install liblzma --triplet ${{ matrix.triplet }}
+          ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
 
       - name: Build binary
         uses: actions-rs/cargo@v1
