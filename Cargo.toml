@@ -33,7 +33,7 @@ rayon = "1.7.0"
 rust-lzma = { version = "0.6.0", features = ["static"] }
 sha2 = "0.10.8"
 sync-unsafe-cell = "0.1.0"
-tempfile = "3.6.0"
+tempfile = "3.9.0"
 zip = { version = "0.6.6", features = [
     "deflate",
     "bzip2",
