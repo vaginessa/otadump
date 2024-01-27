@@ -13,14 +13,14 @@ verification - no fear of a bad OTA file bricking your device.
 
 ## Features
 
-|                              | [crazystylus/otadump] | [ssut/payload-dumper-go] | [vm03/payload_dumper]                     |
-| ---------------------------- | --------------------- | ------------------------ | ----------------------------------------- |
-| Input file verification      | ✔                     | ✔                        |                                           |
-| Output file verification     | ✔                     |                          |                                           |
-| Extract selective partitions | ✔                     | ✔                        | ✔                                         |
-| Parallelized extraction      | ✔                     | ✔                        |                                           |
-| Runs directly on .zip files  | ✔                     | ✔                        |                                           |
-| Incremental OTA support      |                       |                          | [Partial][payload_dumper-incremental-ota] |
+|                              | [crazystylus/otadump] | [ssut/payload-dumper-go] | [vm03/payload_dumper]                      |
+| ---------------------------- | --------------------- | --------------------------| ----------------------------------------- |
+| Input file verification      | ✅                     | ✅                        | ❌                                        |
+| Output file verification     | ✅                     | ❌                        | ❌                                        |
+| Extract selective partitions | ✅                     | ✅                        | ✅                                        |
+| Parallelized extraction      | ✅                     | ✅                        | ❌                                        |
+| Runs directly on .zip files  | ✅                     | ✅                        | ❌                                        |
+| Incremental OTA support      | ❌                     | ❌                        | [Partial][payload_dumper-incremental-ota] |
 
 ## Benchmarks
 
@@ -42,13 +42,9 @@ System specifications:
 
 ### macOS / Linux
 
-Install a pre-built binary:
+Download a pre-built binary: [Releases]
 
-```sh
-curl -sS https://raw.githubusercontent.com/crazystylus/otadump/mainline/install.sh | bash
-```
-
-Otherwise, using Cargo:
+Otherwise, install with Cargo:
 
 ```sh
 # Needs LZMA, Protobuf and pkg-config libraries installed.
@@ -76,17 +72,14 @@ otadump payload.bin
 
 ## Contributors
 
-- [Kartik Sharma][crazystylus]
-- [Ajeet D'Souza][ajeetdsouza]
+- [Kartik Sharma](https://github.com/crazystylus)
+- [Ajeet D'Souza](https://github.com/ajeetdsouza)
+- [topminipie](https://github.com/topminipie)
 
-[ajeetdsouza]: https://github.com/ajeetdsouza
 [benchmarks]: contrib/benchmarks.svg
-[crates.io-badge]: https://img.shields.io/crates/v/otadump?logo=rust&logoColor=white&style=flat-square
-[crates.io]: https://crates.io/crates/otadump
-[crazystylus]: https://github.com/crazystylus
-[crazystylus/otadump]: https://github.com/crazystylus/otadump
+[crazystylus/otadump]: https://github.com/topminipie/otadump
 [demo]: contrib/demo.gif
 [payload_dumper-incremental-ota]: https://github.com/vm03/payload_dumper/issues/53
-[releases]: https://github.com/crazystylus/otadump/releases
+[releases]: https://github.com/topminipie/otadump/latest
 [ssut/payload-dumper-go]: https://github.com/ssut/payload-dumper-go
 [vm03/payload_dumper]: https://github.com/vm03/payload_dumper
