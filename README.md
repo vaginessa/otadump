@@ -80,6 +80,6 @@ otadump payload.bin
 [crazystylus/otadump]: https://github.com/topminipie/otadump
 [demo]: contrib/demo.gif
 [payload_dumper-incremental-ota]: https://github.com/vm03/payload_dumper/issues/53
-[releases]: https://github.com/topminipie/otadump/latest
+[releases]: https://github.com/topminipie/otadump/releases/latest
 [ssut/payload-dumper-go]: https://github.com/ssut/payload-dumper-go
 [vm03/payload_dumper]: https://github.com/vm03/payload_dumper
