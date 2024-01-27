@@ -14,6 +14,9 @@ on:
 permissions:
   contents: read
 
+env:
+  VCPKG_COMMIT_ID: "8eb57355a4ffb410a2e94c07b4dca2dffbee8e50"
+
 jobs:
   ci:
     name: ${{ matrix.target }}
@@ -78,6 +81,8 @@ jobs:
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
         id: runvcpkg
+        with:
+          vcpkgGitCommitId: '${{ env.VCPKG_COMMIT_ID }}'
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
