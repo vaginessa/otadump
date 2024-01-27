@@ -82,6 +82,7 @@ jobs:
         uses: lukka/run-vcpkg@v11
         id: runvcpkg
         with:
+          vcpkgDirectory: C:/vcpkg
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT_ID }}'
 
       - name: Install liblzma on windows
