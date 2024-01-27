@@ -81,7 +81,6 @@ jobs:
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
         with:
-          vcpkgDirectory: '${{ runner.workspace }}/vcpkg'
           doNotUpdateVcpkg: true
           vcpkgGitCommitId: '${{ env.VCPKG_COMMIT_ID }}'
 
