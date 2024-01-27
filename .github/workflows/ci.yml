@@ -77,11 +77,12 @@ jobs:
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
+        id: runvcpkg
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
         run: |
-          ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
+          ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }} install liblzma --triplet ${{ matrix.triplet }}
 
       - name: Build binary
         uses: actions-rs/cargo@v1
