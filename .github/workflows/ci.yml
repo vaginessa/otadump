@@ -3,11 +3,9 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ "mainline" ]
     paths-ignore:
       - "README.md"
   push:
-    branches: [ "mainline" ]
     paths-ignore:
       - "README.md"
 
