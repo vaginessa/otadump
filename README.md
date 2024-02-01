@@ -50,7 +50,7 @@ Otherwise, install with Cargo:
 # Needs LZMA, Protobuf and pkg-config libraries installed.
 # - On macOS: brew install protobuf xz pkg-config
 # - On Debian / Ubuntu: apt install liblzma-dev protobuf-compiler pkg-config
-cargo install --locked otadump
+cargo install --locked --git https://github.com/topminipie/otadump.git
 ```
 
 ### Windows
