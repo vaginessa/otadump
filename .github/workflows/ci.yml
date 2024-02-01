@@ -72,7 +72,7 @@ jobs:
 
       - name: Install protoc on Windows
         if: runner.os == 'Windows'
-        uses: arduino/setup-protoc@v2
+        uses: arduino/setup-protoc@v3
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
