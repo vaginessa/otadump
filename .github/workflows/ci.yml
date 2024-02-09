@@ -91,6 +91,14 @@ jobs:
           args: --release --locked --target=${{ matrix.target }} --color=always --verbose
           use-cross: ${{ runner.os == 'Linux' }}
 
+      - name: Check code formatting
+        continue-on-error: true
+        run: cargo fmt --all -- --check
+        
+      - name: Run clippy
+        continue-on-error: true
+        run: cargo clippy -- -D warnings
+
       - name: Package for *nix
         if: runner.os != 'Windows'
         run: >
