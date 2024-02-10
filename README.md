@@ -13,8 +13,8 @@ verification - no fear of a bad OTA file bricking your device.
 
 ## Features
 
-|                              | [crazystylus/otadump] | [ssut/payload-dumper-go] | [vm03/payload_dumper]                      |
-| ---------------------------- | --------------------- | --------------------------| ----------------------------------------- |
+|                              | [topminipie/otadump] | [ssut/payload-dumper-go] | [vm03/payload_dumper]                       |
+| ---------------------------- | ---------------------- | --------------------------| ----------------------------------------- |
 | Input file verification      | ✅                     | ✅                        | ❌                                        |
 | Output file verification     | ✅                     | ❌                        | ❌                                        |
 | Extract selective partitions | ✅                     | ✅                        | ✅                                        |
@@ -40,23 +40,9 @@ System specifications:
 
 ## Installation
 
-### macOS / Linux
+### Windows / Linux / macOS
 
 Download a pre-built binary: [Releases]
-
-Otherwise, install with Cargo:
-
-```sh
-# Needs LZMA, Protobuf and pkg-config libraries installed.
-# - On macOS: brew install protobuf xz pkg-config
-# - On Debian / Ubuntu: apt install liblzma-dev protobuf-compiler pkg-config
-cargo install --locked --git https://github.com/topminipie/otadump.git
-```
-
-### Windows
-
-Download the pre-built binary from the [Releases] page. Extract it and run the
-`otadump.exe` file.
 
 ## Usage
 
@@ -77,7 +63,7 @@ otadump payload.bin
 - [topminipie](https://github.com/topminipie)
 
 [benchmarks]: contrib/benchmarks.svg
-[crazystylus/otadump]: https://github.com/topminipie/otadump
+[topminipie/otadump]: https://github.com/topminipie/otadump
 [demo]: contrib/demo.gif
 [payload_dumper-incremental-ota]: https://github.com/vm03/payload_dumper/issues/53
 [releases]: https://github.com/topminipie/otadump/releases/latest
