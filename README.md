@@ -42,7 +42,9 @@ System specifications:
 
 ### Windows / Linux / macOS
 
-Download a pre-built binary: [Releases]
+It is strongly recommended to use only stable [releases](https://github.com/topminipie/otadump/releases/latest)!
+
+Download a pre-built binary: [Releases](https://github.com/topminipie/otadump/releases/latest)
 
 ## Usage
 
@@ -66,6 +68,5 @@ otadump payload.bin
 [topminipie/otadump]: https://github.com/topminipie/otadump
 [demo]: contrib/demo.gif
 [payload_dumper-incremental-ota]: https://github.com/vm03/payload_dumper/issues/53
-[releases]: https://github.com/topminipie/otadump/releases/latest
 [ssut/payload-dumper-go]: https://github.com/ssut/payload-dumper-go
 [vm03/payload_dumper]: https://github.com/vm03/payload_dumper
