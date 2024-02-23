@@ -71,13 +71,15 @@ jobs:
       - name: Install protoc on Windows
         if: runner.os == 'Windows'
         uses: arduino/setup-protoc@v3
+        with:    # https://github.com/protocolbuffers/protobuf/releases/latest
+          version: "25.x"
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
         uses: lukka/run-vcpkg@v11
         id: runvcpkg
         with:                # https://github.com/microsoft/vcpkg/releases/latest
-          vcpkgGitCommitId: '53bef8994c541b6561884a8395ea35715ece75db' # 2024.01.12
+          vcpkgGitCommitId: 'fba75d09065fcc76a25dcf386b1d00d33f5175af' # 2024.02.14
 
       - name: Install liblzma on windows
         if: runner.os == 'Windows'
@@ -95,7 +97,15 @@ jobs:
         continue-on-error: true
         run: cargo fmt --all -- --check
         
-      - name: Run clippy
+      - name: Run clippy (Linux)
+        if: runner.os == 'Linux'
+        continue-on-error: true
+        run: |
+          sudo apt install -y protobuf-compiler
+          cargo clippy -- -D warnings
+          
+      - name: Run clippy (MacOS, Windows)
+        if: runner.os != 'Linux'
         continue-on-error: true
         run: cargo clippy -- -D warnings
 
