@@ -71,6 +71,8 @@ jobs:
       - name: Install protoc on Windows
         if: runner.os == 'Windows'
         uses: arduino/setup-protoc@v3
+        with:    # https://github.com/protocolbuffers/protobuf/releases/latest
+          version: "25.x"
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
@@ -95,7 +97,15 @@ jobs:
         continue-on-error: true
         run: cargo fmt --all -- --check
         
-      - name: Run clippy
+      - name: Run clippy (Linux)
+        if: runner.os == 'Linux'
+        continue-on-error: true
+        run: |
+          apt install protobuf-compiler
+          cargo clippy -- -D warnings
+          
+      - name: Run clippy (MacOS, Windows)
+        if: runner.os != 'Linux'
         continue-on-error: true
         run: cargo clippy -- -D warnings
 
