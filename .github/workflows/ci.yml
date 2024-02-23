@@ -101,7 +101,7 @@ jobs:
         if: runner.os == 'Linux'
         continue-on-error: true
         run: |
-          apt install -y protobuf-compiler
+          sudo apt install -y protobuf-compiler
           cargo clippy -- -D warnings
           
       - name: Run clippy (MacOS, Windows)
