@@ -110,7 +110,7 @@ jobs:
         run: cargo clippy -- -D warnings
 
       - name: Package for *nix
-        if: runner.os != 'Windows'
+        if: runner.os != 'Windows' && github.repository == 'topminipie/otadump'
         run: >
           tar -cv
           LICENSE README.md
@@ -119,13 +119,14 @@ jobs:
           > 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.tar.gz'
           
       - name: Package for Windows
-        if: runner.os == 'Windows'
+        if: runner.os == 'Windows' && github.repository == 'topminipie/otadump'
         run: >
           7z a 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip'
           LICENSE README.md
           ./target/${{ matrix.target }}/release/otadump.exe
           
       - name: Upload artifact
+        if: github.repository == 'topminipie/otadump'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.target }}
