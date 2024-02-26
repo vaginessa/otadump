@@ -89,11 +89,11 @@ jobs:
         run: |
           sudo apt install -y liblzma-dev protobuf-compiler
           
-          dpkg --add-architecture arm64
-          apt install -y liblzma-dev:arm64 protobuf-compiler
+          sudo dpkg --add-architecture arm64
+          sudo apt install -y liblzma-dev:arm64 protobuf-compiler
           
-          dpkg --add-architecture armhf 
-          apt install -y liblzma-dev:armhf protobuf-compiler
+          sudo dpkg --add-architecture armhf 
+          sudo apt install -y liblzma-dev:armhf protobuf-compiler
           
       - name: Build
         run: cargo build --release --locked --target=${{ matrix.target }} --color=always --verbose
