@@ -92,13 +92,13 @@ jobs:
         if: runner.os == 'Linux' && matrix.target == 'aarch64-unknown-linux-gnu'
         run: |
           sudo dpkg --add-architecture arm64
-          sudo apt install -y liblzma-dev protobuf-compiler
+          sudo apt install -y liblzma-dev.arm64 protobuf-compiler
 
       - name: Install xz, protobuf on Linux arm
         if: runner.os == 'Linux' && matrix.target == 'armv7-unknown-linux-gnueabihf'
         run: |
           sudo dpkg --add-architecture armhf 
-          sudo apt install -y liblzma-dev protobuf-compiler
+          sudo apt install -y liblzma-dev.armhf protobuf-compiler
           
       - name: Build
         run: cargo build --release --locked --target=${{ matrix.target }} --color=always --verbose
