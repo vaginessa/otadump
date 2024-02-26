@@ -84,18 +84,18 @@ jobs:
         run: |
           ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
           
-      - name: Install xz, protobuf on Linux x86-64
-        if: runner.os == 'Linux' && runner.arch == 'X64'
+      - name: Install xz, protobuf on Linux x86_64
+        if: runner.os == 'Linux' && matrix.target == 'x86_64-unknown-linux-gnu'
         run: sudo apt install -y liblzma-dev protobuf-compiler
         
       - name: Install xz, protobuf on Linux arm64
-        if: runner.os == 'Linux' && runner.arch == 'ARM64'
+        if: runner.os == 'Linux' && matrix.target == 'aarch64-unknown-linux-gnu'
         run: |
           sudo dpkg --add-architecture arm64
           sudo apt install -y liblzma-dev:arm64 protobuf-compiler
 
       - name: Install xz, protobuf on Linux arm
-        if: runner.os == 'Linux' && runner.arch == 'ARM'
+        if: runner.os == 'Linux' && matrix.target == 'armv7-unknown-linux-gnueabihf'
         run: |
           sudo dpkg --add-architecture armhf 
           sudo apt install -y liblzma-dev:armhf protobuf-compiler
