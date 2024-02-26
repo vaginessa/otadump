@@ -84,7 +84,9 @@ jobs:
 
       - name: Build binary for Linux
         if: runner.os == 'Linux'
-        run: cross build --release --locked --target=${{ matrix.target }} --color=always --verbose
+        run: |
+          cargo install cross
+          cross build --release --locked --target=${{ matrix.target }} --color=always --verbose
 
       - name: Check code formatting
         continue-on-error: true
