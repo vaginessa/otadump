@@ -107,7 +107,6 @@ jobs:
           
       - name: Run clippy (MacOS, Windows)
         if: runner.os != 'Linux'
-      - name: Run clippy
         continue-on-error: true
         run: cargo clippy -- -D warnings
 
