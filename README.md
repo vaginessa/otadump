@@ -42,7 +42,7 @@ System specifications:
 
 ### Windows / Linux / macOS
 
-It is strongly recommended to use only stable [releases](https://github.com/topminipie/otadump/releases/latest)!
+It is strongly recommended to use only stable [releases](https://github.com/topminipie/otadump/releases/latest)! (Don't use nightly builds with GitHub Actions!)
 
 Download a pre-built binary: [Releases](https://github.com/topminipie/otadump/releases/latest)
 
