@@ -87,8 +87,13 @@ jobs:
       - name: Install xz, protobuf on Linux
         if: runner.os == 'Linux'
         run: |
-          sudo apt update
           sudo apt install -y liblzma-dev protobuf-compiler
+          
+          dpkg --add-architecture arm64
+          apt install -y liblzma-dev:arm64 protobuf-compiler
+          
+          dpkg --add-architecture armhf 
+          apt install -y liblzma-dev:armhf protobuf-compiler
           
       - name: Build
         run: cargo build --release --locked --target=${{ matrix.target }} --color=always --verbose
@@ -103,7 +108,7 @@ jobs:
 
       - name: Package for Linux, MacOS
         if: runner.os != 'Windows' && github.repository == 'topminipie/otadump'
-        run: |
+        run: >
           tar -cv
           LICENSE README.md
           -C target/${{ matrix.target }}/release/ otadump
@@ -112,7 +117,7 @@ jobs:
           
       - name: Package for Windows
         if: runner.os == 'Windows' && github.repository == 'topminipie/otadump'
-        run: |
+        run: >
           7z a 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip'
           LICENSE README.md
           ./target/${{ matrix.target }}/release/otadump.exe
