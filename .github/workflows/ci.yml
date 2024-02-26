@@ -53,7 +53,7 @@ jobs:
           toolchain: stable
           targets: ${{ matrix.target }}
 
-      - name: Setup cache
+      - name: Setup Rust cache
         uses: Swatinem/rust-cache@v2
         with:
           key: ${{ matrix.target }}
@@ -69,8 +69,8 @@ jobs:
       - name: Install protoc on Windows
         if: runner.os == 'Windows'
         uses: arduino/setup-protoc@v3
-        with:    # https://github.com/protocolbuffers/protobuf/releases/latest
-          version: "25.x"
+        with:
+          version: "25.x" # https://github.com/protocolbuffers/protobuf/releases/latest
 
       - name: Install vcpkg on windows
         if: runner.os == 'Windows'
@@ -79,37 +79,31 @@ jobs:
         with:                # https://github.com/microsoft/vcpkg/releases/latest
           vcpkgGitCommitId: 'fba75d09065fcc76a25dcf386b1d00d33f5175af' # 2024.02.14
 
-      - name: Install liblzma on windows
+      - name: Install liblzma on Windows
         if: runner.os == 'Windows'
         run: |
           ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/vcpkg.exe install liblzma --triplet ${{ matrix.triplet }}
-
-      - name: Build binary
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --release --locked --target=${{ matrix.target }} --color=always --verbose
-          use-cross: ${{ runner.os == 'Linux' }}
+          
+      - name: Install xz, protobuf on Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt update
+          sudo apt install -y liblzma-dev protobuf-compiler
+          
+      - name: Build
+        run: cargo build --release --locked --target=${{ matrix.target }} --color=always --verbose
 
       - name: Check code formatting
         continue-on-error: true
         run: cargo fmt --all -- --check
         
-      - name: Run clippy (Linux)
-        if: runner.os == 'Linux'
-        continue-on-error: true
-        run: |
-          sudo apt install -y protobuf-compiler
-          cargo clippy -- -D warnings
-          
-      - name: Run clippy (MacOS, Windows)
-        if: runner.os != 'Linux'
+      - name: Run clippy
         continue-on-error: true
         run: cargo clippy -- -D warnings
 
-      - name: Package for *nix
+      - name: Package for Linux, MacOS
         if: runner.os != 'Windows' && github.repository == 'topminipie/otadump'
-        run: >
+        run: |
           tar -cv
           LICENSE README.md
           -C target/${{ matrix.target }}/release/ otadump
@@ -118,7 +112,7 @@ jobs:
           
       - name: Package for Windows
         if: runner.os == 'Windows' && github.repository == 'topminipie/otadump'
-        run: >
+        run: |
           7z a 'otadump-${{ steps.get_version.outputs.value }}-${{ matrix.target }}.zip'
           LICENSE README.md
           ./target/${{ matrix.target }}/release/otadump.exe
