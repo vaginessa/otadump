@@ -74,7 +74,7 @@ jobs:
         uses: lukka/run-vcpkg@v11
         id: runvcpkg
         with:                # https://github.com/microsoft/vcpkg/releases/latest
-          vcpkgGitCommitId: 'fba75d09065fcc76a25dcf386b1d00d33f5175af' # 2024.02.14
+          vcpkgGitCommitId: 'a34c873a9717a888f58dc05268dea15592c2f0ff' # 2024.03.25
 
       - name: Install liblzma on Windows
         if: runner.os == 'Windows'
